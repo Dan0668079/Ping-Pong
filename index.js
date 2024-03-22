@@ -11,9 +11,12 @@ function setup() {
 
 }
 function draw() {
+  //! Desenho do Campo
   canvasCtx.fillStyle = ('#286047')
   canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
 
+
+  //! Desenho Linha Central
   canvasCtx.fillStyle = '#ffffff';
 
   const x = window.innerWidth / 2 - lineWidth / 2
@@ -22,6 +25,12 @@ function draw() {
   const h = window.innerHeight
 
   canvasCtx.fillRect(x, y, w, h)
+
+  //! Desenho Raquete esquerda
+  canvasCtx.fillRect(10, 100, lineWidth, 200)
+  //! Desenho Raquete esquerda
+  canvasCtx.fillRect(window.innerWidth - lineWidth - 10, 250, lineWidth, 200)
+
 }
 
 setup();
