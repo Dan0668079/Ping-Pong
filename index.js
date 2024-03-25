@@ -106,6 +106,21 @@ const ball = {
         this._pointUp()
       }
     }
+    // Verifica se o jogador 2 fez um ponto(x < 0)
+    if (this.x < this.r + leftPaddle.w + gapX) {
+      // Verifica se a raquete esquerda está na posição y da bola
+      if (this.y + this.r > leftPaddle.y &&
+        this.y - this.r < leftPaddle.y + leftPaddle.h
+      ) {
+        // rebate invertendo o sinal de X
+        this._reverseX()
+      } else {
+        // pontuar o jogador 1
+        score.increaseComputer();
+        this._pointUp()
+      }
+    }
+
     // Verifica as laterais superior e inferior do campo
     if (
       (this.y - this.r < 0 && this.directionY < 0) ||
