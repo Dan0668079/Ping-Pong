@@ -1,6 +1,9 @@
 const canvasEl = document.querySelector('canvas');
 const canvasCtx = canvasEl.getContext('2d');
 const gapX = 10
+
+const mouse = { x: 0, y: 0 }
+
 const field = {
   w: window.innerWidth,
   h: window.innerHeight,
@@ -29,13 +32,18 @@ const line = {
 
 const leftPaddle = {
   x: gapX,
-  y: 350,
+  y: 0,
   w: line.w,
   h: 200,
+  _move: function () {
+    this.y = mouse.y - this.h / 2
+  },
   draw: function () {
     //! Desenho Raquete esquerda
     // canvasCtx.fillStyle = '#ffffff';
     canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+
+    this._move()
   }
 }
 
@@ -123,3 +131,10 @@ function main() {
 
 setup();
 main()
+
+canvasEl.addEventListener("mousemove", function (e) {
+  mouse.x = e.pageX
+  mouse.y = e.pageY
+
+  console.log(mouse)
+})
