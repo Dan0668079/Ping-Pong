@@ -9,7 +9,23 @@ const field = {
   draw: function () {
     //! Desenho do Campo
     canvasCtx.fillStyle = ('#286047')
-    canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+    canvasCtx.fillRect(0, 0, this.w, this.h)
+  }
+}
+
+const line = {
+  w: 15,
+  h: field.h,
+  draw: function () {
+    //! Desenho Linha Central
+    canvasCtx.fillStyle = '#ffffff';
+
+    const x = field.w / 2 - this.w / 2
+    const y = 0
+    const w = this.w
+    const h = this.h
+
+    canvasCtx.fillRect(x, y, w, h)
   }
 }
 
@@ -22,16 +38,9 @@ function setup() {
 
 function draw() {
   field.draw();
+  line.draw();
 
-  //! Desenho Linha Central
-  canvasCtx.fillStyle = '#ffffff';
 
-  const x = window.innerWidth / 2 - lineWidth / 2
-  const y = 0
-  const w = lineWidth
-  const h = window.innerHeight
-
-  canvasCtx.fillRect(x, y, w, h)
   //! Desenho Raquete esquerda
   canvasCtx.fillRect(10, 100, lineWidth, 200)
   //! Desenho Raquete esquerda
