@@ -1,8 +1,6 @@
 const canvasEl = document.querySelector('canvas');
 const canvasCtx = canvasEl.getContext('2d');
-console.log(canvasCtx)
-const lineWidth = 15
-
+const gapX = 10
 const field = {
   w: window.innerWidth,
   h: window.innerHeight,
@@ -29,6 +27,30 @@ const line = {
   }
 }
 
+const leftPaddle = {
+  x: gapX,
+  y: 350,
+  w: line.w,
+  h: 200,
+  draw: function () {
+    //! Desenho Raquete esquerda
+    // canvasCtx.fillStyle = '#ffffff';
+    canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+  }
+}
+const rightPaddle = {
+  x: field.w - line.w - gapX,
+  y: 50,
+  w: line.w,
+  h: 200,
+  draw: function () {
+    //! Desenho Raquete direita
+    // canvasCtx.fillStyle = '#ffffff';
+    canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+
+  }
+}
+
 function setup() {
   canvasEl.width = field.w;
   canvasEl.height = field.h;
@@ -39,12 +61,11 @@ function setup() {
 function draw() {
   field.draw();
   line.draw();
+  leftPaddle.draw();
+  rightPaddle.draw();
 
 
-  //! Desenho Raquete esquerda
-  canvasCtx.fillRect(10, 100, lineWidth, 200)
-  //! Desenho Raquete esquerda
-  canvasCtx.fillRect(window.innerWidth - lineWidth - 10, 250, lineWidth, 200)
+
   //! Desenho da bolinha
   canvasCtx.beginPath()
   canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false)
