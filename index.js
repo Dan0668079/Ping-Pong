@@ -38,6 +38,7 @@ const leftPaddle = {
     canvasCtx.fillRect(this.x, this.y, this.w, this.h)
   }
 }
+
 const rightPaddle = {
   x: field.w - line.w - gapX,
   y: 50,
@@ -50,12 +51,28 @@ const rightPaddle = {
 
   }
 }
+
+const score = {
+  human: 1,
+  computer: 2,
+  draw: function () {
+    //! Desenho o placar
+    canvasCtx.font = "bold 72px Arial"
+    canvasCtx.textAlign = "center"
+    canvasCtx.textBaseline = "top"
+    canvasCtx.fillStyle = "#01341D"
+    canvasCtx.fillText(this.human, field.w * 0.25, 50)
+    canvasCtx.fillText(this.computer, field.w * 0.75, 50)
+  }
+}
+
 const ball = {
   x: 300,
   y: 200,
   r: 20,
   draw: function () {
     //! Desenho da bolinha
+    canvasCtx.fillStyle = '#ffffff';
     canvasCtx.beginPath()
     canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
     canvasCtx.fill()
@@ -74,18 +91,8 @@ function draw() {
   line.draw();
   leftPaddle.draw();
   rightPaddle.draw();
+  score.draw();
   ball.draw();
-
-
-
-
-  //! Desenho o placar
-  canvasCtx.font = "bold 72px Arial"
-  canvasCtx.textAlign = "center"
-  canvasCtx.textBaseline = "top"
-  canvasCtx.fillStyle = "#01341D"
-  canvasCtx.fillText("3", window.innerWidth * 0.25, 50)
-  canvasCtx.fillText("1", window.innerWidth * 0.75, 50)
 }
 setup();
 draw();
