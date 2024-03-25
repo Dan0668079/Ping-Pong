@@ -3,17 +3,26 @@ const canvasCtx = canvasEl.getContext('2d');
 console.log(canvasCtx)
 const lineWidth = 15
 
+const field = {
+  w: window.innerWidth,
+  h: window.innerHeight,
+  draw: function () {
+    //! Desenho do Campo
+    canvasCtx.fillStyle = ('#286047')
+    canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+  }
+}
+
 function setup() {
-  canvasEl.width = window.innerWidth;
-  canvasCtx.width = window.innerWidth;
-  canvasEl.height = window.innerHeight;
-  canvasCtx.height = window.innerHeight;
+  canvasEl.width = field.w;
+  canvasEl.height = field.h;
+  canvasCtx.width = field.w;
+  canvasCtx.height = field.h;
 }
 
 function draw() {
-  //! Desenho do Campo
-  canvasCtx.fillStyle = ('#286047')
-  canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+  field.draw();
+
   //! Desenho Linha Central
   canvasCtx.fillStyle = '#ffffff';
 
