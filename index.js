@@ -50,6 +50,17 @@ const rightPaddle = {
 
   }
 }
+const ball = {
+  x: 300,
+  y: 200,
+  r: 20,
+  draw: function () {
+    //! Desenho da bolinha
+    canvasCtx.beginPath()
+    canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+    canvasCtx.fill()
+  }
+}
 
 function setup() {
   canvasEl.width = field.w;
@@ -63,13 +74,11 @@ function draw() {
   line.draw();
   leftPaddle.draw();
   rightPaddle.draw();
+  ball.draw();
 
 
 
-  //! Desenho da bolinha
-  canvasCtx.beginPath()
-  canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false)
-  canvasCtx.fill()
+
   //! Desenho o placar
   canvasCtx.font = "bold 72px Arial"
   canvasCtx.textAlign = "center"
