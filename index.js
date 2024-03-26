@@ -92,13 +92,14 @@ const ball = {
   directionX: 1,
   directionY: 1,
   _calcPosition: function () {
-    // Verifica se o jogador 1 fez um ponto(x > largura do campo)
+    // verifica se o jogador 1 fez um ponto (x > largura do campo)
     if (this.x > field.w - this.r - rightPaddle.w - gapX) {
-      // Verifica se a raquete direita está na posição y da bola
+      // verifica se a raquete direita está na posição y da bola
       if (
         this.y + this.r > rightPaddle.y &&
-        this.y - this.r < rightPaddle.y + rightPaddle.h) {
-        // rebate invertendo o sinal de X
+        this.y - this.r < rightPaddle.y + rightPaddle.h
+      ) {
+        // rebate a bola intervertendo o sinal de X
         this._reverseX()
       } else {
         // pontuar o jogador 1
@@ -106,37 +107,48 @@ const ball = {
         this._pointUp()
       }
     }
-    // Verifica se o jogador 2 fez um ponto(x < 0)
+
+    // verifica se o jogador 2 fez um ponto (x < 0)
     if (this.x < this.r + leftPaddle.w + gapX) {
-      // Verifica se a raquete esquerda está na posição y da bola
-      if (this.y + this.r > leftPaddle.y &&
+      // verifica se a raquete esquerda está na posição y da bola
+      if (
+        this.y + this.r > leftPaddle.y &&
         this.y - this.r < leftPaddle.y + leftPaddle.h
       ) {
-        // rebate invertendo o sinal de X
+        // rebate a bola intervertendo o sinal de X
         this._reverseX()
       } else {
-        // pontuar o jogador 1
-        score.increaseComputer();
+        // pontuar o jogador 2
+        score.increaseComputer()
         this._pointUp()
       }
     }
 
-    // Verifica as laterais superior e inferior do campo
+    // verifica as laterais superior e inferior do campo
     if (
       (this.y - this.r < 0 && this.directionY < 0) ||
       (this.y > field.h - this.r && this.directionY > 0)
     ) {
-      //rebate a bola invertendo o sinal do eixo y
+      // rebate a bola invertendo o sinal do eixo Y
       this._reverseY()
     }
   },
   _reverseX: function () {
+    // 1 * -1 = -1
+    // -1 * -1 = 1
     this.directionX *= -1
   },
   _reverseY: function () {
+    // 1 * -1 = -1
+    // -1 * -1 = 1
     this.directionY *= -1
   },
+  _speedUp: function () {
+    this.speed += 3
+  },
   _pointUp: function () {
+    this._speedUp()
+
     this.x = field.w / 2
     this.y = field.h / 2
   },
@@ -145,16 +157,16 @@ const ball = {
     this.y += this.directionY * this.speed
   },
   draw: function () {
-    //! Desenho da bolinha
-    canvasCtx.fillStyle = '#ffffff';
+    canvasCtx.fillStyle = "#ffffff"
     canvasCtx.beginPath()
     canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
     canvasCtx.fill()
 
     this._calcPosition()
     this._move()
-  }
+  },
 }
+
 
 function setup() {
   canvasEl.width = field.w;
@@ -172,7 +184,7 @@ function draw() {
   ball.draw();
 }
 
-window.animationFrame = (function () {
+window.animateFrame = (function () {
   return (
     window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
@@ -180,14 +192,14 @@ window.animationFrame = (function () {
     window.oRequestAnimationFrame ||
     window.msRequestAnimationFrame ||
     function (callback) {
-      return window.setTimeout(callback, 100 / 60)
+      return window.setTimeout(callback, 1000 / 60)
     }
-
   )
+
 })()
 
 function main() {
-  animationFrame(main)
+  animateFrame(main)
   draw()
 }
 
