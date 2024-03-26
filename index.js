@@ -52,8 +52,18 @@ const rightPaddle = {
   y: 50,
   w: line.w,
   h: 200,
+  speed: 5,
+
   _move: function () {
-    this.y = ball.y
+    if (this.y + this.h / 2 < ball.y + ball.r) {
+      this.y += this.speed
+    } else {
+      this.y -= this.speed
+    }
+  },
+
+  speedUp: function () {
+    this.speed += 2
   },
   draw: function () {
     //! Desenho Raquete direita
@@ -144,10 +154,11 @@ const ball = {
     this.directionY *= -1
   },
   _speedUp: function () {
-    this.speed += 3
+    this.speed += 2
   },
   _pointUp: function () {
     this._speedUp()
+    rightPaddle.speedUp()
 
     this.x = field.w / 2
     this.y = field.h / 2
